@@ -1,77 +1,83 @@
-const button = document.getElementById("btn");
-const input = document.getElementById("userInput");
+const addListButton = document.getElementById("btn");
+// const userInput = document.getElementById("userInput");
+const userInput = document.querySelector("input");
 const notifyElement = document.getElementById("note");
-const completeElement = document.getElementById("done");
+const validationError = document.getElementById("validationError")
+const note = document.getElementById('note')
 
-notify = `Please enter some values !`;
-
-button.addEventListener("click", function() {
-    if (input.value.length > 0) {
-        const todoList = document.querySelector("#todo-list");
-        const todoItem = document.createElement("li");
-        todoItem.classList.add("todo-item");
-
-        todoItem.appendChild(document.createTextNode(input.value));
-        const content = document.createElement("div");
-        const actions = document.createElement("div");
-        const completeButton = document.createElement("button");
-        const deleteButton = document.createElement("button");
-
-        content.classList.add("todo-content");
-        actions.classList.add("actions");
-        completeButton.classList.add("complete");
-        deleteButton.classList.add("delete");
-
-        completeButton.innerHTML = `<img src="images/check.png">`;
-        deleteButton.innerHTML = `<img src="images/delete.png">`
+let notify = `Please enter some values !`;
+let isFieldEmpty = true
 
 
-        actions.appendChild(completeButton);
-        actions.appendChild(deleteButton);
-        todoItem.appendChild(content);
-        todoItem.appendChild(actions);
 
-        completeButton.addEventListener("click", completefunc)
 
-        todoList.appendChild(todoItem);
-        todoList.insertBefore(todoItem, todoList.childNodes[0]);
-        input.value = "";   
 
-    }else {
-        // notifyElement.innerHTML = notify;
-        // notifyElement.style.color = "red"
-        // notifyElement.style.fontWeight = "200"
-        alert("Please enter some values !")
-    }
-})
 
-function completefunc() {
-    let slash = document.getElementById("done")
-    todoItem.appendChild(document.createTextNode(input.value)).innerHTML = slash
+
+const addList = () => {
+  
+    const todoList = document.querySelector("#todo-list");
+            const todoItem = document.createElement("div");
+            todoItem.classList.add("todo-item");
+    
+            todoItem.appendChild(document.createTextNode(input.value));
+            const content = document.createElement("div");
+            const actions = document.createElement("div");
+            const deleteButton = document.createElement("addListButton");
+    
+            content.classList.add("todo-content");
+            actions.classList.add("actions");
+            deleteButton.classList.add("delete");
+    
+    
+            deleteButton.innerHTML = `<img src="images/delete.png">`
+    
+    
+            actions.appendChild(deleteButton);
+            todoItem.appendChild(content);
+            todoItem.appendChild(actions);
+    
+            deleteButton.addEventListener("click", deletefunc);
+    
+            todoList.appendChild(todoItem);
+            todoList.insertBefore(todoItem, todoList.childNodes[0]);
+            input.value = "";
+            isFieldEmpty = false;
 }
 
-input.addEventListener("keypress", function(event) {
-    if (input.value.length > 0 && event.keyCode === 13) {
+
+
+
+
+
+function deletefunc() {
+    const todoItem = this.parentNode.parentNode
+    const parent = todoItem.parentNode;
+
+    parent.removeChild(todoItem);
+
+}
+
+userInput.addEventListener("keypress", function (event) {
+  
+    if (userInput.value.length > 0 && event.keyCode === 13) {
         const todoList = document.querySelector("#todo-list");
         const todoItem = document.createElement("div");
         todoItem.classList.add("todo-item");
-        todoItem.appendChild(document.createTextNode(input.value));
-
+        todoItem.appendChild(document.createTextNode(userInput.value));
 
         const content = document.createElement("div");
         const actions = document.createElement("div");
-        const complete = document.createElement("button");
-        const deleteButton = document.createElement("button");
+        const deleteButton = document.createElement("addListButton");
 
         content.classList.add("todo-content");
         actions.classList.add("actions");
-        complete.classList.add("complete");
         deleteButton.classList.add("delete");
 
-        complete.innerHTML = `<img src="images/check.png">`;
         deleteButton.innerHTML = `<img src="images/delete.png">`
 
-        actions.appendChild(complete);
+        deleteButton.addEventListener("click", deletefunc);
+
         actions.appendChild(deleteButton);
         todoItem.appendChild(content);
         todoItem.appendChild(actions)
@@ -79,7 +85,6 @@ input.addEventListener("keypress", function(event) {
         todoList.appendChild(todoItem);
         todoList.insertBefore(todoItem, todoList.childNodes[0]);
 
-
-        input.value = "";   
+        userInput.value = "";
     }
 })

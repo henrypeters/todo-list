@@ -9,14 +9,15 @@
 </head>
 <body>
     
-        <div class="header">
-            <input id="userInput" type="text" placeholder="enter an activity...">
-            <button id="btn"><img src="images/big-plus-sign.png"></button>
-        </div>
-        <p id="note"></p>
-
-
+    <div class="header">
+        <input id="userInput" type="text" placeholder="Enter an activity..." value="" name="name">
+        <button id="btn"><img src="images/big-plus-sign.png"></button>
+    </div>
+    <p id="note"></p>
+    
+    
     <section class="todo-list">
+        <p id="validationError"></p>
         <div class="list" id="todo-list"></div>
         <!-- <div class="done"></div> -->
              <!-- <div class="todo-item done">
@@ -41,8 +42,8 @@
                     <button class="delete"><img src="images/icon-delete.svg" alt=""></button>
                 </div>
             </div> -->
-    </section>
         </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
